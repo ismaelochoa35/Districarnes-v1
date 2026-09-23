@@ -1,0 +1,4 @@
+BACKEND/node_modules/
+BACKEND/.npm-cache/
+BACKEND/.env
+*.log

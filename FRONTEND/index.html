@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iniciar sesión | Districarnes</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <main class="login-page">
+    <form id="login-form" class="card login-card" autocomplete="off">
+      <div class="logo">D</div>
+      <p class="overline">Administración</p>
+      <h1>Districarnes</h1>
+      <p class="muted">Ingresa para administrar los productos.</p>
+
+      <label>
+        Correo
+        <input id="email" name="login_identifier" type="email" autocomplete="off" autocapitalize="none" spellcheck="false" data-lpignore="true" data-1p-ignore required>
+      </label>
+      <label>
+        Contraseña
+        <span class="password-field">
+          <input id="password" name="login_secret" type="password" autocomplete="new-password" data-lpignore="true" data-1p-ignore required>
+          <button type="button" class="password-eye" data-password-target="password" aria-label="Mostrar contraseña" title="Mostrar contraseña">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </button>
+        </span>
+      </label>
+      <label>
+        Confirmar contraseña
+        <span class="password-field">
+          <input id="password-confirmation" name="login_secret_confirmation" type="password" autocomplete="new-password" data-lpignore="true" data-1p-ignore required>
+          <button type="button" class="password-eye" data-password-target="password-confirmation" aria-label="Mostrar contraseña" title="Mostrar contraseña">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </button>
+        </span>
+      </label>
+
+      <p id="login-error" class="error" aria-live="polite"></p>
+      <button type="submit">Ingresar</button>
+    </form>
+  </main>
+
+  <script type="module" src="/js/login.js"></script>
+</body>
+</html>

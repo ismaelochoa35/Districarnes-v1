@@ -1,0 +1,52 @@
+[
+  {
+    "name": "01_acceso",
+    "title": "Pantalla de acceso",
+    "path": "recorrido/01_acceso.png"
+  },
+  {
+    "name": "02_inicio",
+    "title": "Inicio y navegación",
+    "path": "recorrido/02_inicio.png"
+  },
+  {
+    "name": "03_inventario",
+    "title": "Inventario y botones de productos",
+    "path": "recorrido/03_inventario.png"
+  },
+  {
+    "name": "04_producto",
+    "title": "Formulario para crear y editar",
+    "path": "recorrido/04_producto.png"
+  },
+  {
+    "name": "05_venta",
+    "title": "Nueva venta y carrito",
+    "path": "recorrido/05_venta.png"
+  },
+  {
+    "name": "06_historial",
+    "title": "Consulta de ventas",
+    "path": "recorrido/06_historial.png"
+  },
+  {
+    "name": "07_recibo",
+    "title": "Recibo de venta",
+    "path": "recorrido/07_recibo.png"
+  },
+  {
+    "name": "08_reporte",
+    "title": "Reporte diario",
+    "path": "recorrido/08_reporte.png"
+  },
+  {
+    "name": "09_cuentas",
+    "title": "Administración de cuentas",
+    "path": "recorrido/09_cuentas.png"
+  },
+  {
+    "name": "10_cuenta_nueva",
+    "title": "Crear una cuenta",
+    "path": "recorrido/10_cuenta_nueva.png"
+  }
+]

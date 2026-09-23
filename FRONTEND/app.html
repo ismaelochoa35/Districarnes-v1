@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel administrativo | Districarnes</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="app-page">
+  <header class="topbar">
+    <strong class="brand"><span class="logo small">D</span><span>Districarnes<small>Panel administrativo</small></span></strong>
+    <button id="logout" class="secondary">Cerrar sesión</button>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <p class="menu-label">Menú principal</p>
+      <nav class="side-nav" aria-label="Navegación principal">
+        <button data-section="home" class="nav-button active"><span>⌂</span> Inicio</button>
+        <button data-section="inventory" class="nav-button"><span>▦</span> Inventario</button>
+        <button data-section="sales" class="nav-button"><span>+</span> Nueva venta</button>
+        <button data-section="history" class="nav-button"><span>◷</span> Historial</button>
+        <button data-section="administrators" class="nav-button"><span>☷</span> Administradores</button>
+      </nav>
+      <div class="sidebar-help"><strong>Acceso rápido</strong><p>Elige un módulo. Solo verás la información que necesitas.</p></div>
+    </aside>
+
+    <main class="workspace">
+      <p id="message" class="message" aria-live="polite"></p>
+      <section id="home-section">
+        <article class="welcome-card">
+          <div><p class="overline">Resumen del negocio</p><h1>Bienvenido a Districarnes</h1><p>Controla el inventario, registra ventas o consulta el historial desde un módulo a la vez.</p><div class="welcome-actions"><button data-section="sales">Registrar una venta</button><button data-section="inventory" class="outline-button">Ver inventario</button></div></div>
+          <div class="welcome-mark" aria-hidden="true">D</div>
+        </article>
+        <section class="stats-grid" aria-label="Resumen del sistema">
+          <button class="card stat-card" data-section="inventory" data-low-stock="false"><span>Productos registrados</span><strong id="stat-products">—</strong><small>Abrir inventario</small></button>
+          <button class="card stat-card" data-section="inventory" data-low-stock="false"><span>Categorías</span><strong id="stat-categories">—</strong><small>Consultar categorías</small></button>
+          <button class="card stat-card" data-section="inventory" data-low-stock="true"><span>Stock bajo</span><strong id="stat-low-stock">—</strong><small>Ver existencias bajas</small></button>
+          <button class="card stat-card" data-section="history"><span>Ventas de hoy</span><strong id="stat-sales">—</strong><small>Abrir historial del día</small></button>
+        </section>
+      </section>
+
+    <section id="inventory-section" class="hidden">
+      <section class="title-row">
+        <div><p class="overline">Panel administrativo</p><h1>Inventario</h1></div>
+        <button id="new-product">+ Nuevo producto</button>
+      </section>
+      <div class="inventory-category-row">
+        <nav id="inventory-category-tabs" class="category-tabs" aria-label="Inventario por categoría"></nav>
+        <article class="card category-daily-card" aria-live="polite">
+          <div><span id="inventory-summary-category">Categoría</span><small id="inventory-summary-date">Ventas de hoy</small></div>
+          <div><strong id="inventory-summary-total">$0</strong><small id="inventory-summary-units">0 unidades base</small></div>
+        </article>
+      </div>
+      <section class="card filters">
+        <input id="search" type="search" placeholder="Buscar nombre o corte">
+        <select id="category-filter"><option value="" disabled>Selecciona una categoría</option></select>
+        <label class="check"><input id="low-stock" type="checkbox"> Stock bajo</label>
+      </section>
+      <section class="card table-wrap">
+        <table>
+          <thead><tr><th>Producto</th><th>Categoría</th><th>Corte</th><th>Precio/base</th><th>Existencia</th><th>Estado</th><th>Acciones</th></tr></thead>
+          <tbody id="product-rows"></tbody>
+        </table>
+      </section>
+    </section>
+
+      <section id="sales-section" class="hidden">
+        <div class="title-row"><div><p class="overline">Punto de venta</p><h1>Nueva venta</h1></div></div>
+        <section class="card sale-filters">
+          <label>
+            Buscar producto
+            <input id="sale-search" type="search" placeholder="Nombre, corte o categoría">
+          </label>
+          <label>
+            Categoría
+            <select id="sale-category-filter"><option value="">Todas las categorías</option></select>
+          </label>
+          <span id="sale-result-count" class="result-count" aria-live="polite"></span>
+        </section>
+        <div class="sales-layout">
+        <section class="catalog-column">
+          <div id="catalog" class="catalog"></div>
+          <div class="catalog-pagination">
+            <button id="sale-previous-page" class="outline-dark">← Anterior</button>
+            <span id="sale-page-label">Página 1</span>
+            <button id="sale-next-page">Siguiente →</button>
+          </div>
+        </section>
+        <aside class="card sale-cart">
+          <h2>Detalle</h2>
+          <label>Cliente<input id="sale-customer" placeholder="Consumidor final" maxlength="100"></label>
+          <label>Método de pago<select id="payment-method"><option value="efectivo">Efectivo</option><option value="tarjeta">Tarjeta</option><option value="transferencia">Transferencia</option></select></label>
+          <div id="cash-payment-fields"><label>Monto recibido<input id="amount-received" type="number" min="0" step="100" placeholder="$0"></label><p class="change-row"><span>Cambio</span><strong id="sale-change">$0</strong></p></div>
+          <div id="cart-items"></div>
+          <div class="cart-total"><span>Total</span><strong id="cart-total">$0</strong></div>
+          <button id="save-sale">Registrar venta</button>
+        </aside>
+      </div>
+    </section>
+
+    <section id="history-section" class="hidden">
+      <div class="title-row"><div><p class="overline">Registros</p><h1>Historial de ventas</h1></div><button id="open-daily-report">Imprimir total del día</button></div>
+      <section class="card history-filters">
+        <label>Fecha<input id="history-date-filter" type="date"></label>
+        <label>Categoría<select id="history-category-filter"><option value="">Todas las categorías</option></select></label>
+        <div class="history-total"><span>Total del día seleccionado</span><strong id="history-category-total">$0</strong><small id="history-category-units">0 unidades</small><small id="history-sale-count">0 ventas</small></div>
+      </section>
+      <section class="card table-wrap">
+        <table>
+          <thead><tr><th>Venta</th><th>Fecha</th><th>Cliente</th><th>Pago</th><th>Productos</th><th id="history-total-column">Total</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="sale-rows"></tbody>
+        </table>
+      </section>
+    </section>
+
+    <section id="administrators-section" class="hidden">
+      <div class="title-row"><div><p class="overline">Seguridad</p><h1>Administradores</h1><p class="muted">Crea accesos individuales y desactiva las cuentas que ya no deban ingresar.</p></div><button id="new-administrator">+ Nuevo administrador</button></div>
+      <section class="card table-wrap"><table><thead><tr><th>Nombre</th><th>Correo</th><th>Estado</th><th>Creado</th><th>Acción</th></tr></thead><tbody id="administrator-rows"></tbody></table></section>
+    </section>
+    </main>
+  </div>
+
+  <dialog id="product-dialog">
+    <form id="product-form" class="dialog-form">
+      <div class="dialog-head"><h2 id="form-title">Nuevo producto</h2><button type="button" id="close-dialog" class="icon">×</button></div>
+      <input id="product-id" type="hidden">
+      <label>Nombre<input id="product-name" required maxlength="100"></label>
+      <label>Tipo de corte<input id="product-cut" maxlength="100"></label>
+      <label>Categoría<select id="product-category" required></select></label>
+      <label>Unidad de venta
+        <select id="product-unit" required>
+          <option value="kg">Kilogramo (kg)</option>
+          <option value="lb">Libra (lb)</option>
+          <option value="unidad">Unidad</option>
+        </select>
+      </label>
+      <div class="two-cols">
+        <label>Precio por unidad de venta<input id="product-price" type="number" min="1" step="0.01" required></label>
+        <label>Existencia disponible<input id="product-stock" type="number" min="0" step="0.001" required></label>
+      </div>
+      <label class="check"><input id="product-active" type="checkbox" checked> Producto activo</label>
+      <button type="submit">Guardar</button>
+    </form>
+  </dialog>
+
+  <dialog id="administrator-dialog">
+    <form id="administrator-form" class="dialog-form">
+      <div class="dialog-head"><h2>Nuevo administrador</h2><button type="button" id="close-administrator-dialog" class="icon">×</button></div>
+      <label>Nombre<input id="administrator-name" required maxlength="100"></label>
+      <label>Correo<input id="administrator-email" type="email" required maxlength="100"></label>
+      <label>Contraseña temporal<input id="administrator-password" type="password" required minlength="6"></label>
+      <p class="muted">Entrega esta contraseña de forma privada al nuevo administrador.</p>
+      <button type="submit">Crear acceso</button>
+    </form>
+  </dialog>
+
+  <dialog id="receipt-dialog" class="receipt-dialog">
+    <div class="receipt" id="receipt-content"></div>
+    <div class="receipt-actions"><button type="button" id="print-receipt">Imprimir</button><button type="button" id="close-receipt" class="outline-dark">Cerrar</button></div>
+  </dialog>
+
+  <dialog id="daily-report-dialog" class="daily-report-dialog">
+    <article id="daily-report-content" class="daily-report"></article>
+    <div class="receipt-actions"><button type="button" id="print-daily-report">Imprimir</button><button type="button" id="close-daily-report" class="outline-dark">Cerrar</button></div>
+  </dialog>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
