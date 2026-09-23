@@ -150,3 +150,4 @@ Antes de compartir el proyecto, borra el valor de `DB_PASSWORD` en `BACKEND/.env
 - Registro transaccional de ventas y descuento automático de stock.
 - Historial, detalle e impresión de recibos.
 - Creación, activación y desactivación de administradores.
+"# Districarnes-v1"  
